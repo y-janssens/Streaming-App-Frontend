@@ -7,7 +7,7 @@ const proxy = "https://y-jns-api.herokuapp.com"
 export const getToken = async (username, password) => {
   const response = await manager({
     method: "POST",
-    url: `/api/token/`,
+    url: `${proxy}/api/token/`,
     data: {
       username,
       password,
