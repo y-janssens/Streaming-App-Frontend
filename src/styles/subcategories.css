@@ -1,0 +1,32 @@
+.sub-container {
+  position: relative;  
+  display: grid;
+  justify-items: center;
+  align-content: flex-start;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.sub-container a {
+  text-decoration: none;
+  color: #fff;
+}
+
+@media (min-width: 1300px) {
+  .sub-container {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1000px) {
+  .sub-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .sub-container {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,27 @@
+.profile-container {
+  position: absolute;
+  width: 100%;
+  top: 45px;
+  bottom: 30px;
+  padding-bottom: 30px;
+  overflow-y: auto;
+}
+
+.profile-title {
+  position: relative;
+  width: 50%;
+  height: 35px;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+@media (max-width: 750px) {
+  .profile-title {
+    height: 25px;
+    font-size: 14px;
+  }
+}

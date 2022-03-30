@@ -1,0 +1,69 @@
+.thumbnail-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.thumbnail-container h4 {
+  margin-bottom: -5px;
+  font-size: 14px;
+}
+
+.thumbnail-container p {
+  font-size: 12px;
+}
+
+.thumbnail-container p:hover {
+  text-decoration: underline;
+}
+
+.thumbnail-body {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 5px;
+  box-shadow: inset rgb(0 0 0 / 12%) 0px 13px 15px -5px,
+    rgb(0 0 0 / 35%) 0px 8px 8px -5px;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  margin-bottom: -5px;
+}
+
+.thumbnail-body img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  outline: none;
+  z-index: 10;
+}
+
+.thumbnail-body:hover {
+  transform: scale(1.05);
+}
+
+.thumbnail-body:hover .thumbnail-icon {
+  visibility: visible;
+  font-size: 70px;
+}
+
+.thumbnail-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 60px;
+  z-index: 12;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(1px);
+}
+
+@media (max-width: 750px) {
+  .thumbnail-container {
+    height: 275px;
+  }
+}

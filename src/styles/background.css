@@ -1,0 +1,18 @@
+#background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    /*background: #202020;*/
+    background-color: #202025;
+    
+}
+
+#pattern {
+    width: 100%;
+    height: 100%;
+    background: url('../assets/dots.png');
+    background-size: 25%;
+    mix-blend-mode: screen;
+    opacity: 0.01;
+    visibility: hidden;
+}
