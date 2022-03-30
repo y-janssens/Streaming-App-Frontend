@@ -34,7 +34,7 @@ function Video() {
         {video.file && (
           <>
           <video className="full-video" controls={true} preload="true" autoPlay={true}>
-          <source src={`http://127.0.0.1:8000/static${video.file}`} />
+          <source src={`${video.file}`} />
           </video>
           
           <div className="video-title">
