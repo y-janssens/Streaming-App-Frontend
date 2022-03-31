@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const manager = axios.create();
-let dev = true;
+let dev = false;
 let proxy;
 
 if (dev) {
