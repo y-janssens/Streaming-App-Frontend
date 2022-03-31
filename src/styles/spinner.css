@@ -9,16 +9,18 @@
     justify-content: center;
     align-items: center;
     transition: 250ms all;
+    cursor: wait;
   }
   
   .loadingspinner {
     width: 64px;
     height: 64px;
     border: 6px solid;
-    border-color: #0076B8 transparent #0076B8 transparent;
+    border-color: #5561f5 transparent #5561f5 transparent;
     border-radius: 50%;
     animation: spin 1.2s linear infinite;
     transition: 250ms all;
+    cursor: wait;
   }
   @keyframes spin {
     0% {

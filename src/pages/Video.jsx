@@ -8,7 +8,7 @@ import '../styles/video.css'
 
 function Video() {
     const {id} = useParams()
-    const { video, loading, dispatch } = useContext(Context);
+    const { video, loading, dispatch, proxy } = useContext(Context);
   
     useEffect(() => {
         dispatch({type: 'SET_LOADING'})
@@ -34,7 +34,7 @@ function Video() {
         {video.file && (
           <>
           <video className="full-video" controls={true} preload="true" autoPlay={true}>
-          <source src={`${video.file}`} />
+          <source src={`${proxy}/static${video.file}`} />
           </video>
           
           <div className="video-title">

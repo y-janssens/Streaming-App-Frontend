@@ -2,11 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Context from "../context/Context";
 import { getCategories, addVideo } from "../context/Actions";
+import Spinner from "./Spinner";
 import '../styles/upload.css';
+import '../styles/loading.css';
 
 function Upload() {
     const navigate = useNavigate();
-    const { categories, dispatch } = useContext(Context);
+    const { categories, loading, dispatch } = useContext(Context);
+    const [isLoading, setIsLoading] = useState(false);
     const [active, setActive] = useState(true)
     const [name, setName] = useState(null)
     const [author, setAuthor] = useState(null)
@@ -24,25 +27,34 @@ function Upload() {
         uploadData.append('category', category)
 
         if (selectedFile && selectedThumbnail && name && author && category !== null) {
-            const videoData = await addVideo(uploadData)
-            dispatch({type: 'POST_VIDEO', payload: videoData})
+            
+            setIsLoading(true)
+            const videoData = await addVideo(uploadData)                        
+            dispatch({type: 'POST_VIDEO', payload: videoData})            
             navigate('/');
         }
         
     }
   
-    useEffect(() => {
+    useEffect(() => {        
+        
       const getCategoriesData = async() => {
           const categoriessData = await getCategories()
           dispatch({type: 'GET_CATEGORIES', payload: categoriessData})
         }
     
         getCategoriesData()
-    }, [dispatch])
+    }, [dispatch, isLoading])
+
+
+
   return (
     <div className='form-container'>
         
         <form className="upload-form" action="" method="post" onSubmit={handlePost}>
+
+            {isLoading && (<div className="loading-container"><Spinner /></div>)}
+
             <input type="text" name="name" id="name" placeholder='name' onChange={(e) => setName(e.target.value)}/>
             <input type="text" name="author" id="author" placeholder='author' onChange={(e) => setAuthor(e.target.value)}/>
 

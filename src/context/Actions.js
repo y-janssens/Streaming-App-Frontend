@@ -1,8 +1,14 @@
 import axios from "axios";
 
 const manager = axios.create();
+let dev = true;
+let proxy;
 
-const proxy = "https://y-jns-api.herokuapp.com"
+if (dev) {
+  proxy = "http://127.0.0.1:8000"
+} else {
+  proxy = "https://y-jns-api.herokuapp.com"
+}
 
 export const getToken = async (username, password) => {
   const response = await manager({

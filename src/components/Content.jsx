@@ -18,7 +18,7 @@ function Content() {
   return (
     <div className="content-container">
         <ul className="content-list">
-
+        
           {videos.map((video) => (
             <li key={video.id} className="content-items">
               <Link to="">{video.name.slice(0,60)}</Link>
