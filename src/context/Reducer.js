@@ -6,6 +6,12 @@ const reducer = (state, action) => {
         token: action.payload,
         loading: false,
       };
+    case "REGISTER_USER":
+      return {
+        ...state,
+        user: action.payload,
+        loading: false,
+      };
     case "SET_LOADING":
       return {
         ...state,
@@ -41,12 +47,12 @@ const reducer = (state, action) => {
         categories: action.payload,
         loading: false,
       };
-      case "DELETE_CATEGORY":
-        return {
-          ...state,
-          category: action.payload,
-          loading: false,
-        };
+    case "DELETE_CATEGORY":
+      return {
+        ...state,
+        category: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }

@@ -6,6 +6,7 @@ const Context = createContext();
 export const Provider = ({ children }) => {
   const initialState = {
     token: {},
+    user: {},
     videos: [],
     video: {},
     categories: [],

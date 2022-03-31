@@ -23,6 +23,18 @@ export const getToken = async (username, password) => {
   return response.data;
 };
 
+export const registerUser = async (username, password, password2, email, first_name, last_name) => {
+  const response = await manager({
+    method: "POST",
+    url: `${proxy}/api/token/`,
+    data: {
+      username, password, password2, email, first_name, last_name,
+    },
+  });
+
+  return response.data;
+};
+
 export const getVideos = async () => {
   const response = await manager.get(`${proxy}/api/videos/`);
 
