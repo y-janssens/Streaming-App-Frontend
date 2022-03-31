@@ -51,7 +51,7 @@ function Upload() {
   return (
     <div className='form-container'>
         
-        <form className="upload-form" action="" method="post" onSubmit={handlePost}>
+        <form className="upload-form" enctype="multipart/form-data" method="post" onSubmit={handlePost}>
 
             {isLoading && (<div className="loading-container"><Spinner /></div>)}
 

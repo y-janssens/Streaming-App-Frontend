@@ -10,7 +10,7 @@ export const Provider = ({ children }) => {
     video: {},
     categories: [],
     category : {},
-    proxy : "http://127.0.0.1:8000",
+    proxy : "https://y-jns-api.herokuapp.com",
     loading: false,
   };
 

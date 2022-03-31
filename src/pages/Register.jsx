@@ -32,8 +32,11 @@ function Register() {
         <form className="login-form" onSubmit={onSubmit}>
             
             <input type="text" name="loginname" id="loginname" placeholder='Username'onChange={(e) => setUsername(e.target.value)}/>
-            <input type="password" name="password" id="password" placeholder="**********" onChange={(e) => setPassword(e.target.value)}/>
-            <input type="email" name="email" id="email" placeholder="Email adress" onChange={(e) => setEmail(e.target.value)}/>           
+            <input type="password" name="password" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+            <input type="password" name="password2" id="password2" placeholder="Password Confirmation" onChange={(e) => setPassword(e.target.value)}/>
+            <input type="email" name="email" id="email" placeholder="Email adress" onChange={(e) => setEmail(e.target.value)}/>     
+            <input type="text" name="firstname" id="firstname" placeholder='First Name'onChange={(e) => setUsername(e.target.value)}/>
+            <input type="text" name="lastname" id="lastname" placeholder='Last Name'onChange={(e) => setUsername(e.target.value)}/>      
             <button id="login" type="submit">Register</button>  
             <Link className="register-link" to="/login">Login</Link>   
         </form>        
