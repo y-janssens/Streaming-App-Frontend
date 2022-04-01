@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import { getToken } from "../context/Actions";
 import Context from "../context/Context";
@@ -23,14 +24,15 @@ function Login() {
 
     if (access) {
       const getTokenAccess = async () => {
-        const token = await getToken(username, password);
 
         try {
+          const token = await getToken(username, password);
           dispatch({ type: "GET_TOKEN", payload: token });
           localStorage.setItem("authToken", JSON.stringify(token.access));
+          toast.success(`Welcome ${username}!`);
           navigate("/");
         } catch (error) {
-          console.log(error);          
+          toast.error('Your username or password is incorrect');         
         }
       };
 

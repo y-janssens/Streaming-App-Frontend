@@ -26,7 +26,7 @@ export const getToken = async (username, password) => {
 export const registerUser = async (username, password, password2, email, first_name, last_name) => {
   const response = await manager({
     method: "POST",
-    url: `${proxy}/api/token/`,
+    url: `${proxy}/api/register/`,
     data: {
       username, password, password2, email, first_name, last_name,
     },

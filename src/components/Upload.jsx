@@ -2,15 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Context from "../context/Context";
 import { getCategories, addVideo } from "../context/Actions";
+import { toast } from "react-toastify";
 import Spinner from "./Spinner";
 import '../styles/upload.css';
 import '../styles/loading.css';
 
 function Upload() {
     const navigate = useNavigate();
-    const { categories, loading, dispatch } = useContext(Context);
+    const { categories, dispatch } = useContext(Context);
     const [isLoading, setIsLoading] = useState(false);
-    const [active, setActive] = useState(true)
     const [name, setName] = useState(null)
     const [author, setAuthor] = useState(null)
     const [category, setCategory] = useState(null)
@@ -30,10 +30,10 @@ function Upload() {
             
             setIsLoading(true)
             const videoData = await addVideo(uploadData)                        
-            dispatch({type: 'POST_VIDEO', payload: videoData})            
+            dispatch({type: 'POST_VIDEO', payload: videoData})
+            toast.success('Content successfully uploaded!')            
             navigate('/');
-        }
-        
+        }        
     }
   
     useEffect(() => {        
@@ -45,8 +45,6 @@ function Upload() {
     
         getCategoriesData()
     }, [dispatch, isLoading])
-
-
 
   return (
     <div className='form-container'>
@@ -65,11 +63,9 @@ function Upload() {
                     <option key={cat.id}>{cat.name}</option>
                 ))}
             </select>
-            {active === false ? (
-                <input type="text" name="ncategory" id="ncategory" disabled={true} placeholder='Category'/>
-            ) : (
-                <input type="text" name="ncategory" id="ncategory" placeholder='New category' onChange={(e) => setCategory(e.target.value)}/>
-            )}
+
+            <input type="text" name="ncategory" id="ncategory" placeholder='New category' onChange={(e) => setCategory(e.target.value)}/>
+
             </div>
             <div className="file-input">
             <input type="file" className="file" id="file" onChange={(e) => setSelectedFile(e.target.files[0])}/>

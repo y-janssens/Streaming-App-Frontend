@@ -35,3 +35,7 @@ button {
 :disabled::placeholder {
   color: #606060;
 }
+
+.Toastify__toast-theme--dark {
+  background: #404040 !important;
+}
