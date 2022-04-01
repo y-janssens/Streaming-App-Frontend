@@ -12,6 +12,18 @@ const reducer = (state, action) => {
         user: action.payload,
         loading: false,
       };
+    case "GET_PROFILE":
+      return {
+        ...state,
+        profile: action.payload,
+        loading: false,
+      };
+    case "EDIT_PROFILE":
+      return {
+        ...state,
+        profile: action.payload,
+        loading: false,
+      };
     case "SET_LOADING":
       return {
         ...state,

@@ -23,6 +23,24 @@ export const getToken = async (username, password) => {
   return response.data;
 };
 
+export const getProfile = async (username) => {
+  const response = await manager.get(`${proxy}/api/profile/${username}`);
+
+  return response.data;
+};
+
+export const editProfile = async (username, first_name, last_name, email) => {
+  const response = await manager({
+    method: 'PUT',
+    url: `${proxy}/api/profile/${username}`,
+    data : {
+      username, first_name, last_name, email
+    }
+  });
+
+  return response.data;
+};
+
 export const registerUser = async (username, password, password2, email, first_name, last_name) => {
   const response = await manager({
     method: "POST",

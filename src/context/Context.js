@@ -3,6 +3,15 @@ import reducer from "./Reducer";
 
 const Context = createContext();
 
+let dev = false;
+let proxy;
+
+if (dev) {
+  proxy = "http://127.0.0.1:8000"
+} else {
+  proxy = "https://y-jns-api.herokuapp.com"
+}
+
 export const Provider = ({ children }) => {
   const initialState = {
     token: {},
@@ -11,7 +20,8 @@ export const Provider = ({ children }) => {
     video: {},
     categories: [],
     category : {},
-    proxy : "https://y-jns-api.herokuapp.com",
+    profile: {},
+    proxy : proxy,
     loading: false,
   };
 
