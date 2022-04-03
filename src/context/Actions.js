@@ -1,6 +1,15 @@
 import axios from "axios";
 
+const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
+const GITHUB_ENDPOINT = process.env.REACT_APP_GITHUB_ENDPOINT;
+const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
+
 const manager = axios.create();
+const github = axios.create({
+  baseURL: GITHUB_URL,
+  headers: {authorization: `token ${GITHUB_TOKEN}`}
+})
+
 let dev = false;
 let proxy;
 
@@ -8,6 +17,30 @@ if (dev) {
   proxy = "http://127.0.0.1:8000"
 } else {
   proxy = "https://y-jns-api.herokuapp.com"
+}
+
+export const uploadVideo = async (message, content, file) => {
+  const response = await github({
+    method: 'PUT',
+    url: `${GITHUB_ENDPOINT}/videos/${file}`,
+    data: {      
+        "message": message,
+        "content": content    
+    }
+  })
+  return response.data;
+}
+
+export const uploadThumbnail = async (message, content, file) => {
+  const response = await github({
+    method: 'PUT',
+    url: `${GITHUB_ENDPOINT}/${file}`,
+    data: {      
+        "message": message,
+        "content": content    
+    }
+  })
+  return response.data;
 }
 
 export const getToken = async (username, password) => {

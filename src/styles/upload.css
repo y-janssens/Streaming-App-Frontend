@@ -36,7 +36,7 @@
   width: 50%;
 }
 
-#file,
+#file, #file2,
 #thumbnail {
   position: absolute;
   opacity: 0;

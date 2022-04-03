@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Context from "../context/Context";
-import { getCategories, addVideo } from "../context/Actions";
+import { getCategories, addVideo, uploadVideo, uploadThumbnail } from "../context/Actions";
 import { toast } from "react-toastify";
 import Spinner from "./Spinner";
 import '../styles/upload.css';
@@ -14,26 +14,87 @@ function Upload() {
     const [name, setName] = useState(null)
     const [author, setAuthor] = useState(null)
     const [category, setCategory] = useState(null)
+    const [message, setMessage] = useState(null)
+
+    const [uploadFile, setUploadFile] = useState(null)
+    const [uploadThumbnailFile, setuploadThumbnailFile] = useState(null)
+
     const [selectedFile, setSelectedFile] = useState(null)
+    const [selectedFileName, setSelectedFileName] = useState(null)
+
     const [selectedThumbnail, setSelectedThumbnail] = useState(null)
+    const [selectedThumbnailName, setSelectedThumbnailName] = useState(null)
     const uploadData = new FormData();
+
+    const encodeFile = (e) => {
+        const target = e.target.files[0];
+        setUploadFile(target);
+        setSelectedFileName(target.name);
+        setMessage(`Upload ${target.name}`)
+  
+          const reader = new FileReader();
+          reader.onloadend = () => {
+              const base64String = reader.result
+                  .replace('data:', '')
+                  .replace(/^.+,/, '');
+  
+                  setSelectedFile(base64String);
+          };
+          reader.readAsDataURL(target);      
+      }
+
+      const encodeThumbnail = (e) => {
+        const target = e.target.files[0];
+        setuploadThumbnailFile(target);
+        setSelectedThumbnailName(target.name);
+        setMessage(`Upload ${target.name}`)
+  
+          const reader = new FileReader();
+          reader.onloadend = () => {
+              const base64String = reader.result
+                  .replace('data:', '')
+                  .replace(/^.+,/, '');
+  
+                  setSelectedThumbnail(base64String);
+          };
+          reader.readAsDataURL(target);      
+      }
 
     const handlePost = async (e) => {
         e.preventDefault();
-        uploadData.append('file' , selectedFile)
-        uploadData.append('thumbnail' , selectedThumbnail)
+        uploadData.append('file' , uploadFile)
+        uploadData.append('thumbnail' , uploadThumbnailFile)
         uploadData.append('name', name)
         uploadData.append('author', author)
         uploadData.append('category', category)
 
-        if (selectedFile && selectedThumbnail && name && author && category !== null) {
-            
+       if (uploadFile.size <= 20000000 ) {
+
+        if (uploadFile && uploadThumbnailFile && name && author && category !== null) {            
+            try {
+               
             setIsLoading(true)
             const videoData = await addVideo(uploadData)                        
             dispatch({type: 'POST_VIDEO', payload: videoData})
+
+            const fileData = await uploadVideo(message, selectedFile, selectedFileName)                        
+            dispatch({type: 'UPLOAD_VIDEO', payload: fileData})
+
+            const thumbnailData = await uploadThumbnail(message, selectedThumbnail, selectedThumbnailName)                        
+            dispatch({type: 'UPLOAD_THUMB', payload: thumbnailData})
+
+
             toast.success('Content successfully uploaded!')            
             navigate('/');
-        }        
+
+            } catch (error) {
+                setIsLoading(false)
+                console.log(error);
+            }
+        } 
+       } else {
+           toast.error('File is too large, maximum size allowed: 20Mo')
+       }       
     }
   
     useEffect(() => {        
@@ -68,9 +129,9 @@ function Upload() {
 
             </div>
             <div className="file-input">
-            <input type="file" className="file" id="file" onChange={(e) => setSelectedFile(e.target.files[0])}/>
+            <input type="file" className="file" id="file" onChange={encodeFile}/>
             <label htmlFor="file">File</label>
-            <input type="file" className="thumbnail" id="thumbnail" onChange={(e) => setSelectedThumbnail(e.target.files[0])}/>
+            <input type="file" className="thumbnail" id="thumbnail" onChange={encodeThumbnail}/>
             <label htmlFor="thumbnail">Thumbnail</label>
             <button id="upload" type="submit">Upload</button>
             </div>

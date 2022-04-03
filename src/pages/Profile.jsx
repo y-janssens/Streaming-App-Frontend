@@ -2,6 +2,7 @@ import Upload from '../components/Upload';
 import Infos from '../components/Infos';
 import Content from '../components/Content';
 import CatContent from '../components/CatContent';
+import Gitupload from '../components/GitUpload';
 import '../styles/profile.css';
 
 function Profile() {
