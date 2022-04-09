@@ -2,10 +2,13 @@ import Upload from '../components/Upload';
 import Infos from '../components/Infos';
 import Content from '../components/Content';
 import CatContent from '../components/CatContent';
-import Gitupload from '../components/GitUpload';
+import Context from "../context/Context";
+import { useContext } from "react";
 import '../styles/profile.css';
 
 function Profile() {
+
+  const { categories, videos } = useContext(Context);
   
   return (
     <div className='profile-container'>
@@ -15,11 +18,19 @@ function Profile() {
         <div className="profile-title">Upload new content</div>
         <Upload />
 
-        <div className="profile-title">Manage existing content</div>
-        <Content />
+        {videos.length > 0 && (
+          <>
+            <div className="profile-title">Manage existing content</div>
+              <Content />
+          </>
+        )}
 
-        <div className="profile-title">Manage categories</div>
-        <CatContent />
+        {categories.length > 0 && (
+          <>
+            <div className="profile-title">Manage categories</div>
+              <CatContent />
+          </>
+        )}
     </div>
   )
 }

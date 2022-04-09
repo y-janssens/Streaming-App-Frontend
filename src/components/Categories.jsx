@@ -18,19 +18,23 @@ function Categories() {
     }, [dispatch])
     
   return (
-    <div className='category-container'>
+    <>
+    {categories.length > 0 && (
+      <div className='category-container'>
 
-    {categories.map((category) => (
-        <div className='category' key={category.id}>          
-        {category.name === item ? (
-          <Link to={`/${category.name}`}><button className="category-link active">{category.name}</button></Link>
-        ) : (
-          <Link to={`/${category.name}`}><button className="category-link">{category.name}</button></Link>
-        )}        
-    </div>
-    ))}
-
-    </div>
+      {categories.map((category) => (
+          <div className='category' key={category.id}>          
+          {category.name === item ? (
+            <Link to={`/${category.name}`}><button className="category-link active">{category.name}</button></Link>
+          ) : (
+            <Link to={`/${category.name}`}><button className="category-link">{category.name}</button></Link>
+          )}        
+      </div>
+      ))}
+  
+      </div>
+    )}
+    </>
   )
 }
 

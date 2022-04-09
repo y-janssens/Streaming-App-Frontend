@@ -1,0 +1,30 @@
+.files-handling-items {
+  position: relative;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  margin: 0px 10px 0 10px;
+  color: #fff;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.files-handling-crud {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-family: "Comic Neue", cursive !important;
+  color: #dd5044;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 0;
+  margin-right: 0 !important;
+  cursor: pointer;
+}
+
+.files-handling-crud:hover {
+    transform: scale(1.2);
+  }

@@ -4,6 +4,7 @@ import Context from "../context/Context";
 import { getCategories, addVideo, uploadVideo, uploadThumbnail } from "../context/Actions";
 import { toast } from "react-toastify";
 import Spinner from "./Spinner";
+import File from "./File";
 import '../styles/upload.css';
 import '../styles/loading.css';
 
@@ -32,7 +33,6 @@ function Upload() {
         const target = e.target.files[0];
         setUploadFile(target);
         setSelectedFileName(target.name);
-        console.log(target.name);
         setMessage(`Upload ${target.name}`)
   
           const reader = new FileReader();
@@ -121,24 +121,35 @@ function Upload() {
             <input type="text" name="name" id="name" placeholder='name' onChange={(e) => setName(e.target.value)}/>
             <input type="text" name="author" id="author" placeholder='author' onChange={(e) => setAuthor(e.target.value)}/>
 
-            <div className="categories-grp">    
-            <select name="category" id="category" onChange={(e) => setCategory(e.target.value)}>
-		<option value="empty">Category</option>
-                {categories.map((cat) => (
-                    <option key={cat.id}>{cat.name}</option>
-                ))}
-            </select>
+            <div className="categories-grp">   
+
+                <select name="category" id="category" onChange={(e) => setCategory(e.target.value)}>
+                    <option value="empty">Category</option>
+
+                        {categories.map((cat) => (
+                            <option key={cat.id}>{cat.name}</option>
+                        ))}
+
+                </select>
 
             <input type="text" name="ncategory" id="ncategory" placeholder='New category' onChange={(e) => setCategory(e.target.value)}/>
 
             </div>
             <div className="file-input">
-            <input type="file" className="file" id="file" onChange={encodeFile}/>
-            <label htmlFor="file">File</label>
-            <input type="file" className="thumbnail" id="thumbnail" onChange={encodeThumbnail}/>
-            <label htmlFor="thumbnail">Thumbnail</label>
-            <button id="upload" type="submit">Upload</button>
+
+                <input type="file" className="file" id="file" onChange={encodeFile}/>
+                    <label htmlFor="file">File</label>
+
+                <input type="file" className="thumbnail" id="thumbnail" onChange={encodeThumbnail}/>
+                    <label htmlFor="thumbnail">Thumbnail</label>
+
+                <button id="upload" type="submit">Upload</button>
             </div>
+
+       
+                <File anchor={uploadFile} name={selectedFileName} reset={setUploadFile}/>             
+                <File anchor={uploadThumbnailFile} name={selectedThumbnailName} reset={setuploadThumbnailFile}/>
+       
             
             
         </form>
