@@ -24,12 +24,15 @@ function Upload() {
 
     const [selectedThumbnail, setSelectedThumbnail] = useState(null)
     const [selectedThumbnailName, setSelectedThumbnailName] = useState(null)
+
+    const maxSize = 20000000; // 20Mb
     const uploadData = new FormData();
 
     const encodeFile = (e) => {
         const target = e.target.files[0];
         setUploadFile(target);
         setSelectedFileName(target.name);
+        console.log(target.name);
         setMessage(`Upload ${target.name}`)
   
           const reader = new FileReader();
@@ -63,12 +66,13 @@ function Upload() {
     const handlePost = async (e) => {
         e.preventDefault();
         uploadData.append('file' , uploadFile)
+        uploadData.append('fileName', selectedFileName)
         uploadData.append('thumbnail' , uploadThumbnailFile)
         uploadData.append('name', name)
         uploadData.append('author', author)
         uploadData.append('category', category)
 
-       if (uploadFile.size <= 20000000 ) {
+       if (uploadFile.size <= maxSize ) {
 
         if (uploadFile && uploadThumbnailFile && name && author && category !== null) {            
             try {
