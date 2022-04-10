@@ -5,19 +5,16 @@ import "../styles/searchbar.css";
 function Searchbar({ videos }) {
   const { dispatch } = useContext(Context);
   const [queryset, setQueryset] = useState(null);
-  const [res, setResult] = useState(null);
 
   useEffect(() => {
     let query = videos.filter(function (video) {
       return video.name.toLowerCase().includes(queryset?.toLowerCase());
     });
 
-    setResult(query[0] ? query[0].name : null);      
     dispatch({type: 'QUERY_SET', payload: query});
 
-    //console.log(query);
-
-  }, [queryset, res, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryset]);
 
   return (
     <div id="search_bar">
