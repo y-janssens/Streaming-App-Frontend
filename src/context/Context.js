@@ -21,6 +21,7 @@ export const Provider = ({ children }) => {
     categories: [],
     category : {},
     profile: {},
+    result: [],
     proxy : proxy,
     loading: false,
   };

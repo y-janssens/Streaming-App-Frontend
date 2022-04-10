@@ -6,6 +6,12 @@ const reducer = (state, action) => {
         token: action.payload,
         loading: false,
       };
+      case "QUERY_SET":
+      return {
+        ...state,
+        result: action.payload,
+        loading: false,
+      };
     case "UPLOAD_VIDEO":
       return {
         ...state,

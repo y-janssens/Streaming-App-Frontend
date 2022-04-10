@@ -27,7 +27,6 @@ function Upload() {
     const [selectedThumbnailName, setSelectedThumbnailName] = useState(null)
 
     const maxSize = 20000000; // 20Mb
-    const uploadData = new FormData();
 
     const encodeFile = (e) => {
         const target = e.target.files[0];
@@ -65,40 +64,36 @@ function Upload() {
 
     const handlePost = async (e) => {
         e.preventDefault();
-        uploadData.append('file' , uploadFile)
-        uploadData.append('fileName', selectedFileName)
-        uploadData.append('thumbnail' , uploadThumbnailFile)
-        uploadData.append('name', name)
-        uploadData.append('author', author)
-        uploadData.append('category', category)
 
-       if (uploadFile.size <= maxSize ) {
+        if (uploadFile.size <= maxSize ) {
 
-        if (uploadFile && uploadThumbnailFile && name && author && category !== null) {            
-            try {
-               
-            setIsLoading(true)
-            const videoData = await addVideo(uploadData)                        
-            dispatch({type: 'POST_VIDEO', payload: videoData})
+            if (selectedFile && selectedThumbnail && name && author && category !== null) {      
 
-            const fileData = await uploadVideo(message, selectedFile, selectedFileName)                        
-            dispatch({type: 'UPLOAD_VIDEO', payload: fileData})
+                try {
+                
+                setIsLoading(true)
 
-            const thumbnailData = await uploadThumbnail(message, selectedThumbnail, selectedThumbnailName)                        
-            dispatch({type: 'UPLOAD_THUMB', payload: thumbnailData})
+                const videoData = await addVideo(name, author, category, selectedFileName, selectedThumbnailName)                        
+                dispatch({type: 'POST_VIDEO', payload: videoData})                
+                
+                const fileData = await uploadVideo(message, selectedFile, selectedFileName)                        
+                dispatch({type: 'UPLOAD_VIDEO', payload: fileData})
+
+                const thumbnailData = await uploadThumbnail(message, selectedThumbnail, selectedThumbnailName)                        
+                dispatch({type: 'UPLOAD_THUMB', payload: thumbnailData})
 
 
-            toast.success('Content successfully uploaded!')            
-            navigate('/');
+                toast.success('Content successfully uploaded!')            
+                navigate('/');
 
-            } catch (error) {
-                setIsLoading(false)
-                console.log(error);
-            }
-        } 
-       } else {
-           toast.error('File is too large, maximum size allowed: 20Mo')
-       }       
+                } catch (error) {
+                    setIsLoading(false)
+                }
+            } 
+
+        } else {
+            toast.error('File is too large, maximum size allowed: 20Mo')
+        }
     }
   
     useEffect(() => {        

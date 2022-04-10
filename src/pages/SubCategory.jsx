@@ -28,7 +28,7 @@ function Category({ category }) {
                   name={video.name.slice(0, 45)}
                   author={video.author}
                   length={video.length}
-                  path={video.thumbnail}
+                  path={video.thumbnailName}
                 />
               </Link>
             )

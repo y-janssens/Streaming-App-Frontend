@@ -31,10 +31,10 @@ function Video() {
     <div className="block-container">
     <div className="video-container">
         
-        {video.file && (
+        {video.fileName && (
           <>
           <video className="full-video" controls={true} preload="true" autoPlay={true}>
-          <source src={`${proxy}/static${video.file}`} />
+          <source src={`${proxy}/static/images/videos/${video.fileName}`} />
           </video>
           
           <div className="video-title">

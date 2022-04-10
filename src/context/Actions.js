@@ -98,13 +98,16 @@ export const getVideo = async (id) => {
   return response.data;
 };
 
-export const addVideo = async (uploadData) => {
+export const addVideo = async (name, author, category, fileName, thumbnailName) => {
   const response = await manager({
     method: 'POST',
     url: `${proxy}/api/video/add`,
-    data: uploadData,
     headers: {
-      'content-type': 'multipart/form-data',     
+      'Content-Type': 'application/json',
+
+    },
+    data: {
+      name, author, category, fileName, thumbnailName,
     },                     
   });
 
